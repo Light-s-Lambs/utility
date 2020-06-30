@@ -18,4 +18,5 @@ jobs:
         run: chmod +x gradlew
       - name: Test with Gradle
         run: ./gradlew test
-        
+      - name: Ktlint Check with Gradle
+        run: ./gradlew --continue ktlintCheck

@@ -11,7 +11,7 @@ import java.awt.Toolkit
 import javax.swing.JFrame
 import javax.swing.JTextArea
 
-class BinaryEncoderFrame constructor(
+class UnicodeToBinaryEncoderFrame constructor(
     private val component: TextUtilComponent
 ) : JFrame() {
     private val textArea by lazy {

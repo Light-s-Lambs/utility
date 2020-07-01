@@ -16,7 +16,7 @@ class BinaryEncoderComponent : TextUtilComponent {
 
 	override fun apply(text: String) {
 		state.value = ""
-		for(char in text.toByteArray())
+		for (char in text.toByteArray())
 			state.value += char.toUInt().toString(radix = 2)
 	}
 }

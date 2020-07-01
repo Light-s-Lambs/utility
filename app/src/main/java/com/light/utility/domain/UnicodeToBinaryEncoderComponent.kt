@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import java.util.*
 
-class BinaryEncoderComponent : TextUtilComponent {
+class UnicodeToBinaryEncoderComponent : TextUtilComponent {
 
 	@ExperimentalCoroutinesApi
 	private val state: MutableStateFlow<String> by lazy {
@@ -15,8 +15,13 @@ class BinaryEncoderComponent : TextUtilComponent {
 	override fun getState(): StateFlow<String> = state
 
 	override fun apply(text: String) {
-		state.value = ""
+		state.value = convertStringToBinary(text)
+	}
+
+	fun convertStringToBinary(text: String): String {
+		var binStr = ""
 		for (char in text.toByteArray())
-			state.value += char.toUInt().toString(radix = 2)
+			binStr += char.toUInt().toString(radix = 2)
+		return binStr
 	}
 }

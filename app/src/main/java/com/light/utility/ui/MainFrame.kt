@@ -27,6 +27,12 @@ class MainFrame : JFrame() {
         setupView()
         setupEventListeners()
 
+		val binaryEncoderComponent = BinaryEncoderComponent()
+			.also {
+				utils.add(it)
+			}
+		BinaryEncoderFrame(binaryEncoderComponent)
+
         val base64EncoderComponent = Base64EncoderComponent()
             .also {
                 utils.add(it)
@@ -38,12 +44,6 @@ class MainFrame : JFrame() {
 				utils.add(it)
 			}
 		Base64DecoderFrame(base64DecoderComponent)
-
-		val binaryEncoderComponent = BinaryEncoderComponent()
-			.also {
-				utils.add(it)
-			}
-		BinaryEncoderFrame(binaryEncoderComponent)
     }
 
     private fun setupView() {

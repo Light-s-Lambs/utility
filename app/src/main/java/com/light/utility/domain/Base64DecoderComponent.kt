@@ -16,6 +16,5 @@ class Base64DecoderComponent : TextUtilComponent {
 
 	override fun apply(text: String) {
 		state.value = String(Base64.getDecoder().decode(text))
-		// TODO: Check Base64 Format before decode.
 	}
 }

@@ -1,6 +1,7 @@
 package com.light.utility.ui
 
 import com.light.utility.domain.Base64EncoderComponent
+import com.light.utility.domain.BinaryEncoderComponent
 import com.light.utility.domain.TextUtilComponent
 import com.light.utility.domain.UtilComponent
 import java.awt.BorderLayout
@@ -30,6 +31,11 @@ class MainFrame : JFrame() {
                 utils.add(it)
             }
         Base64EncoderFrame(base64EncoderComponent)
+		val binaryEncoderComponent = BinaryEncoderComponent()
+			.also {
+				utils.add(it)
+			}
+		BinaryEncoderFrame(binaryEncoderComponent)
     }
 
     private fun setupView() {

@@ -28,9 +28,6 @@ allprojects {
 
     dependencies {
         ktlint "com.pinterest:ktlint:0.37.2"
-        // additional 3rd party ruleset(s) can be specified here
-        // just add them to the classpath (e.g. ktlint 'groupId:artifactId:version') and
-        // ktlint will pick them up
     }
 
     task ktlintCheck(type: JavaExec, group: "verification") {
@@ -38,9 +35,6 @@ allprojects {
         classpath = configurations.ktlint
         main = "com.pinterest.ktlint.Main"
         args "src/**/*.kt"
-        // to generate report in checkstyle format prepend following args:
-        // "--reporter=plain", "--reporter=checkstyle,output=${buildDir}/ktlint.xml"
-        // see https://github.com/pinterest/ktlint#usage for more
     }
     check.dependsOn ktlintCheck
 

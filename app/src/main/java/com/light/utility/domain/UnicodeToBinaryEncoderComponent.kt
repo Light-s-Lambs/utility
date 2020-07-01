@@ -18,7 +18,7 @@ class UnicodeToBinaryEncoderComponent : TextUtilComponent {
 		state.value = convertStringToBinary(text)
 	}
 
-	fun convertStringToBinary(text: String): String {
+	private fun convertStringToBinary(text: String): String {
 		var binStr = ""
 		for (char in text.toByteArray())
 			binStr += char.toUInt().toString(radix = 2)

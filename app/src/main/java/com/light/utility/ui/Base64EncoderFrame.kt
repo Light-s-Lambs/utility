@@ -1,15 +1,15 @@
 package com.light.utility.ui
 
 import com.light.utility.domain.TextUtilComponent
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import java.awt.Dimension
 import java.awt.Point
 import java.awt.Toolkit
 import javax.swing.JFrame
 import javax.swing.JTextArea
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 
 class Base64EncoderFrame constructor(
     private val component: TextUtilComponent

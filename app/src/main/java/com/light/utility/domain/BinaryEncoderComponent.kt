@@ -15,6 +15,8 @@ class BinaryEncoderComponent : TextUtilComponent {
 	override fun getState(): StateFlow<String> = state
 
 	override fun apply(text: String) {
-		state.value = text.toUInt().toString(radix = 2)
+		state.value = ""
+		for(char in text.toByteArray())
+			state.value += char.toUInt().toString(radix = 2)
 	}
 }

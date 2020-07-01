@@ -1,5 +1,6 @@
 package com.light.utility.ui
 
+import com.light.utility.domain.Base64DecoderComponent
 import com.light.utility.domain.Base64EncoderComponent
 import com.light.utility.domain.BinaryEncoderComponent
 import com.light.utility.domain.TextUtilComponent
@@ -31,6 +32,13 @@ class MainFrame : JFrame() {
                 utils.add(it)
             }
         Base64EncoderFrame(base64EncoderComponent)
+
+		val base64DecoderComponent = Base64DecoderComponent()
+			.also {
+				utils.add(it)
+			}
+		Base64DecoderFrame(base64DecoderComponent)
+
 		val binaryEncoderComponent = BinaryEncoderComponent()
 			.also {
 				utils.add(it)

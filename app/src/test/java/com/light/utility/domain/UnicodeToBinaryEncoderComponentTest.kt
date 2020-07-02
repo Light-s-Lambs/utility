@@ -19,9 +19,4 @@ class UnicodeToBinaryEncoderComponentTest {
     fun testGetState_whenSubscribeEvent_shouldReceiveEmptyString() = runBlockingTest {
         Assert.assertEquals(component.getState().firstOrNull(), "")
     }
-
-    @Test
-    fun testForCI() {
-        Assert.fail()
-    }
 }

@@ -4,20 +4,15 @@ buildscript {
     repositories {
         google()
         jcenter()
-        maven { url "https://plugins.gradle.org/m2/" }
     }
     dependencies {
         classpath "com.android.tools.build:gradle:4.0.0"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "org.jlleitschuh.gradle:ktlint-gradle:9.2.1"
-        // classpath "org.ec4j.editorconfig:"
+
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
 }
-
-apply plugin: "org.jlleitschuh.gradle.ktlint"
-// apply plugin: "org.ec4j.editorconfig"
 
 allprojects {
     repositories {
@@ -25,16 +20,6 @@ allprojects {
         jcenter()
         maven { url 'https://jitpack.io' }
     }
-
-    apply plugin: "org.jlleitschuh.gradle.ktlint"
-    ktlint {
-        version.set("0.37.2")
-        debug.set(true)
-        verbose.set(true)
-        additionalEditorconfigFile = file(".editorconfig")
-        disabledRules = ["no-wildcard-imports"]
-    }
-    // apply plugin: "org.ec4j.editorconfig"
 }
 
 task clean(type: Delete) {

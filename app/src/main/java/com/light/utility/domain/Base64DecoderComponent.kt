@@ -14,7 +14,7 @@ class Base64DecoderComponent : TextUtilComponent {
 
     override fun getState(): StateFlow<String> = state
 
-	override fun apply(text: String) {
-		state.value = String(Base64.getDecoder().decode(text))
-	}
+    override fun apply(text: String) {
+        state.value = String(Base64.getDecoder().decode(text))
+    }
 }

@@ -46,3 +46,9 @@ allprojects {
         args "-F", "src/**/*.kt"
     }
 }
+
+subprojects {
+    afterEvaluate {
+        run.dependsOn ktlintCheck
+    }
+}

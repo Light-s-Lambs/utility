@@ -23,9 +23,7 @@ allprojects {
     }
 
     configurations {
-        ktlint  {
-            extendsFrom implementation
-        }
+        ktlint
     }
 
     dependencies {

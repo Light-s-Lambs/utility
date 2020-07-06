@@ -15,13 +15,34 @@ buildscript {
 }
 
 allprojects {
+    apply plugin: 'java'
     repositories {
         google()
         jcenter()
         maven { url 'https://jitpack.io' }
     }
-}
 
-task clean(type: Delete) {
-    delete rootProject.buildDir
+    configurations {
+        ktlint  {
+            extendsFrom implementation
+        }
+    }
+
+    dependencies {
+        ktlint 'com.pinterest:ktlint:0.37.2'
+    }
+
+    task ktlintCheck(type: JavaExec, group: "verification") {
+        description = "Check Kotlin code style."
+        classpath = configurations.ktlint
+        main = "com.pinterest.ktlint.Main"
+        args "src/**/*.kt"
+    }
+
+    task ktlintFormat(type: JavaExec, group: "formatting") {
+        description = "Fix Kotlin code style deviations."
+        classpath = configurations.ktlint
+        main = "com.pinterest.ktlint.Main"
+        args "-F", "src/**/*.kt"
+    }
 }

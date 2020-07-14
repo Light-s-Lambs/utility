@@ -5,6 +5,9 @@ import com.light.utility.domain.Base64EncoderComponent
 import com.light.utility.domain.TextUtilComponent
 import com.light.utility.domain.UnicodeToBinaryEncoderComponent
 import com.light.utility.domain.UtilComponent
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.awt.BorderLayout
 import java.awt.Dimension
 import java.awt.Toolkit
@@ -24,8 +27,10 @@ class MainFrame : JFrame() {
     }
 
     init {
-        setupView()
-        setupEventListeners()
+        GlobalScope.launch(Dispatchers.Default) {
+            setupView()
+            setupEventListeners()
+        }
 
         val binaryEncoderComponent = UnicodeToBinaryEncoderComponent().also { utils.add(it) }
         UnicodeToBinaryEncoderFrame(binaryEncoderComponent)

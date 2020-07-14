@@ -16,13 +16,25 @@ class HexDecoderComponent : TextUtilComponent {
 
     @ExperimentalCoroutinesApi
     override fun apply(text: String) {
-        val uniString = StringBuilder()
-        val byteArray = text.toByteArray()
+        state.value = convertHexToString(text)
+    }
 
-        for (i in 0 until byteArray.size / 2) {
-            val char = (((byteArray[i * 2].toInt() - 48) shl 4) + (byteArray[(i * 2) + 1].toInt() - 48)).toChar().toString()
-            uniString.append(char)
+    private fun convertHexToString(text: String): String {
+        var textStr = ""
+        var hexChar = ""
+
+        val hexArray = text.toByteArray()
+
+        for (char in hexArray) {
+            hexChar += char.toChar()
+
+            if (hexChar.length == 2) {
+                textStr += hexChar.toLong(radix = 16).toChar()
+                hexChar = ""
+                println(textStr)
+            }
         }
-        state.value = uniString.toString()
+
+        return textStr
     }
 }

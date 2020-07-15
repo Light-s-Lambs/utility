@@ -15,6 +15,28 @@ class Base64DecoderComponent : TextUtilComponent {
     override fun getState(): StateFlow<String> = state
 
     override fun apply(text: String) {
-        state.value = String(Base64.getDecoder().decode(text))
+        state.value = convertBase64toString(text)
+    }
+
+    private fun convertBase64toString(text: String) :String {
+        var base64Str = ""
+        var resultStr = ""
+
+        val base64Array = text.toByteArray()
+
+        for (byte in base64Array) {
+            var char = byte.toChar()
+            if (isBase64(char))
+                base64Str += char
+        }
+
+        if (base64Str.length > 1)
+            resultStr += String(Base64.getDecoder().decode(base64Str))
+
+        return resultStr
+    }
+
+    private fun isBase64(char: Char) :Boolean {
+        return char.isUpperCase() || char.isLowerCase() || char.isDigit() || char.equals(" ") || char.equals("/")
     }
 }

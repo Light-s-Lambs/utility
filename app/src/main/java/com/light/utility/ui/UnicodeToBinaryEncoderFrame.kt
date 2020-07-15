@@ -28,9 +28,8 @@ class UnicodeToBinaryEncoderFrame constructor(
         val screenSize = Toolkit.getDefaultToolkit().screenSize
         size = Dimension(screenSize.width / 2, screenSize.height / 2)
         location = Point(screenSize.width / 2, screenSize.height / 2)
-        isVisible = true
-
         add(textArea)
+        isVisible = true
     }
 
     private fun subscribeEventStream() {

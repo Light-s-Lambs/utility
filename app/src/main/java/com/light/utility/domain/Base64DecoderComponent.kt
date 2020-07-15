@@ -18,7 +18,7 @@ class Base64DecoderComponent : TextUtilComponent {
         state.value = convertBase64toString(text)
     }
 
-    private fun convertBase64toString(text: String) :String {
+    private fun convertBase64toString(text: String): String {
         var base64Str = ""
         var resultStr = ""
 
@@ -36,7 +36,7 @@ class Base64DecoderComponent : TextUtilComponent {
         return resultStr
     }
 
-    private fun isBase64(char: Char) :Boolean {
+    private fun isBase64(char: Char): Boolean {
         return char.isUpperCase() || char.isLowerCase() || char.isDigit() || char.equals(" ") || char.equals("/")
     }
 }

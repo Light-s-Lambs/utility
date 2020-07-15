@@ -26,12 +26,12 @@ class HexDecoderComponent : TextUtilComponent {
         val hexArray = text.toByteArray()
 
         for (char in hexArray) {
-            hexChar += char.toChar()
+            if (char.toInt() != 0x20)
+                hexChar += char.toChar()
 
             if (hexChar.length == 2) {
                 textStr += hexChar.toLong(radix = 16).toChar()
                 hexChar = ""
-                println(textStr)
             }
         }
 

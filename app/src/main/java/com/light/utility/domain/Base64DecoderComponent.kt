@@ -37,6 +37,6 @@ class Base64DecoderComponent : TextUtilComponent {
     }
 
     private fun isBase64(char: Char): Boolean {
-        return char.isUpperCase() || char.isLowerCase() || char.isDigit() || char.equals(" ") || char.equals("/")
+        return char.isUpperCase() || char.isLowerCase() || char.isDigit() || char.equals("+") || char.equals("/")
     }
 }

@@ -22,7 +22,7 @@ class MainFrame : JFrame() {
     val utils by lazy {
         mutableListOf<UtilComponent>()
     }
-    
+
     init {
         setupView()
         setupEventListeners()

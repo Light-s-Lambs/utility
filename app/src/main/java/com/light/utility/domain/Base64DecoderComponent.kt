@@ -20,18 +20,20 @@ class Base64DecoderComponent : TextUtilComponent {
 
     private fun convertBase64toString(text: String): String {
         var base64Str = ""
-        var resultStr = ""
+        val resultStr: String
 
         val base64Array = text.toByteArray()
 
         for (byte in base64Array) {
-            var char = byte.toChar()
+            val char = byte.toChar()
             if (isBase64(char))
                 base64Str += char
         }
 
-        if (base64Str.length > 1)
-            resultStr += String(Base64.getDecoder().decode(base64Str))
+        resultStr = if (base64Str.length > 1)
+            String(Base64.getDecoder().decode(base64Str))
+        else
+            ""
 
         return resultStr
     }

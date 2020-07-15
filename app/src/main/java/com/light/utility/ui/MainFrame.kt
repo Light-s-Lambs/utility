@@ -41,11 +41,9 @@ class MainFrame : JFrame() {
         defaultCloseOperation = EXIT_ON_CLOSE
         val screenSize = Toolkit.getDefaultToolkit().screenSize
         size = Dimension(screenSize.width / 2, screenSize.height / 2)
-        isVisible = true
-
         layout = BorderLayout()
-
         add(textArea, BorderLayout.CENTER)
+        isVisible = true
     }
 
     private fun setupEventListeners() {

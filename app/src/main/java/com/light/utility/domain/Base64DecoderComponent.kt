@@ -19,7 +19,7 @@ class Base64DecoderComponent : TextUtilComponent {
     }
 
     private fun convertBase64toString(text: String): String {
-        val isBase64Str = text.toByteArray().count { isBase64(it.toChar()) == false }
+        val isBase64Str = text.toByteArray().count { !isBase64(it.toChar()) }
         return if (isBase64Str > 0)
             "Check Your Input."
         else

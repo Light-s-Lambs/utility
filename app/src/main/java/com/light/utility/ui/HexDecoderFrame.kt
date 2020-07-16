@@ -28,9 +28,8 @@ class HexDecoderFrame constructor(
         val screenSize = Toolkit.getDefaultToolkit().screenSize
         size = Dimension(screenSize.width / 2, screenSize.height / 2)
         location = Point(0, screenSize.height / 4)
-        isVisible = true
-
         add(textArea)
+        isVisible = true
     }
 
     private fun subscribeEventStream() {

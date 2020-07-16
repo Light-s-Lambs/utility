@@ -16,25 +16,47 @@ class HexDecoderComponent : TextUtilComponent {
 
     @ExperimentalCoroutinesApi
     override fun apply(text: String) {
-        state.value = convertHexToString(text)
+        if (convertHexToString(text).isEmpty())
+            state.value = "Check your Input"
+        else
+            state.value = convertHexToString(text)
     }
 
     private fun convertHexToString(text: String): String {
-        var textStr = ""
-        var hexChar = ""
+        if (isHexString(text)) {
+            var textStr = ""
+            var hexChar = ""
 
-        val hexArray = text.toByteArray()
+            val hexArray = text.toByteArray().filter { isHexDigit(it.toChar()) }.toByteArray()
 
-        for (char in hexArray) {
-            if (char.toInt() != 0x20)
+            for (char in hexArray) {
                 hexChar += char.toChar()
 
-            if (hexChar.length == 2) {
-                textStr += hexChar.toLong(radix = 16).toChar()
-                hexChar = ""
+                if (hexChar.length == 2) {
+                    textStr += hexChar.toLong(radix = 16).toChar()
+                    hexChar = ""
+                }
             }
+
+            return textStr
         }
 
-        return textStr
+        return ""
+    }
+
+    private fun isHexDigit(char: Char): Boolean {
+        val hexChars = "abcdefABCDEF"
+        return char.isDigit() || (char in hexChars)
+    }
+
+    private fun isHexString(hexStr: String): Boolean {
+        val hexArray = hexStr.toByteArray()
+
+        for (char in hexArray) {
+            if ((!isHexDigit(char.toChar())) && (!char.toChar().isWhitespace()))
+                return false
+        }
+
+        return true
     }
 }

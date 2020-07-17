@@ -4,8 +4,9 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
-class HexDecoderComponent : TextUtilComponent {
+const val err_msg = "Check your Input"
 
+class HexDecoderComponent : TextUtilComponent {
     @ExperimentalCoroutinesApi
     private val state: MutableStateFlow<String> by lazy {
         MutableStateFlow("")
@@ -16,8 +17,9 @@ class HexDecoderComponent : TextUtilComponent {
 
     @ExperimentalCoroutinesApi
     override fun apply(text: String) {
+
         if (convertHexToString(text).isEmpty())
-            state.value = "Check your Input"
+            state.value = err_msg
         else
             state.value = convertHexToString(text)
     }

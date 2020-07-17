@@ -15,18 +15,22 @@ class Base64DecoderComponent : TextUtilComponent {
     override fun getState(): StateFlow<String> = state
 
     override fun apply(text: String) {
-        state.value = convertBase64toString(text)
+        state.value = if (isBase64Str(text))
+            convertBase64toString(text)
+        else
+            "Check Your Input."
     }
 
     private fun convertBase64toString(text: String): String {
-        val isBase64Str = text.toByteArray().count { !isBase64(it.toChar()) }
-        return if (isBase64Str > 0)
-            "Check Your Input."
-        else
-            String(Base64.getDecoder().decode(text))
+        val base64StrNoPad = text.split("=")[0]
+        return String(Base64.getDecoder().decode(base64StrNoPad))
     }
 
-    private fun isBase64(char: Char): Boolean {
-        return char.isUpperCase() || char.isLowerCase() || char.isDigit() || char.equals("+") || char.equals("/")
+    private fun isBase64Str(text: String): Boolean {
+        return (text.toByteArray().count { !isBase64Char(it.toChar()) }) == 0
+    }
+
+    private fun isBase64Char(char: Char): Boolean {
+        return char.isUpperCase() || char.isLowerCase() || char.isDigit() || char == '+' || char == '/' || char == '='
     }
 }

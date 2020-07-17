@@ -17,11 +17,12 @@ class HexDecoderComponent : TextUtilComponent {
 
     @ExperimentalCoroutinesApi
     override fun apply(text: String) {
+        val hexStr = convertHexToString(text)
 
-        if (convertHexToString(text).isEmpty())
+        if (hexStr.isEmpty())
             state.value = err_msg
         else
-            state.value = convertHexToString(text)
+            state.value = hexStr
     }
 
     private fun convertHexToString(text: String): String {

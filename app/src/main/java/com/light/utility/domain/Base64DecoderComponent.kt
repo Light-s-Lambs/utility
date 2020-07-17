@@ -5,6 +5,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import java.util.Base64
 
+const val err_msg = "Check your Input"
+
 class Base64DecoderComponent : TextUtilComponent {
 
     @ExperimentalCoroutinesApi
@@ -18,7 +20,7 @@ class Base64DecoderComponent : TextUtilComponent {
         state.value = if (isBase64Str(text))
             convertBase64toString(text)
         else
-            "Check Your Input."
+            err_msg
     }
 
     private fun convertBase64toString(text: String): String {

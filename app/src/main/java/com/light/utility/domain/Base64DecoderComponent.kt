@@ -5,9 +5,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import java.util.Base64
 
-const val err_msg = "Check your Input"
-
 class Base64DecoderComponent : TextUtilComponent {
+
+    companion object { private const val INVALID_INPUT_MESSAGE = "Check your Input" }
 
     @ExperimentalCoroutinesApi
     private val state: MutableStateFlow<String> by lazy {
@@ -20,12 +20,12 @@ class Base64DecoderComponent : TextUtilComponent {
         state.value = if (isBase64Str(text))
             convertBase64toString(text)
         else
-            err_msg
+            INVALID_INPUT_MESSAGE
     }
 
     private fun convertBase64toString(text: String): String {
-        val base64StrNoPad = text.split("=")[0]
-        return String(Base64.getDecoder().decode(base64StrNoPad))
+        val paddingStripped = text.split("=").first()
+        return String(Base64.getDecoder().decode(paddingStripped))
     }
 
     private fun isBase64Str(text: String): Boolean {

@@ -29,7 +29,9 @@ class Base64DecoderComponent : TextUtilComponent {
     }
 
     private fun isBase64Str(text: String): Boolean {
-        return (text.toByteArray().count { !isBase64Char(it.toChar()) }) == 0
+        if (text.length > 1)
+            return (text.toByteArray().count { !isBase64Char(it.toChar()) }) == 0
+        return false
     }
 
     private fun isBase64Char(char: Char): Boolean {

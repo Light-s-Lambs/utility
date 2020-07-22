@@ -4,9 +4,11 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
-const val err_msg = "Check your Input"
-
 class HexDecoderComponent : TextUtilComponent {
+    companion object {
+        const val HEX_DECODING_INPUT_ERROR = "Check your Input"
+    }
+
     @ExperimentalCoroutinesApi
     private val state: MutableStateFlow<String> by lazy {
         MutableStateFlow("")
@@ -20,7 +22,7 @@ class HexDecoderComponent : TextUtilComponent {
         val hexStr = convertHexToString(text)
 
         if (hexStr.isEmpty())
-            state.value = err_msg
+            state.value = HEX_DECODING_INPUT_ERROR
         else
             state.value = hexStr
     }
@@ -28,17 +30,10 @@ class HexDecoderComponent : TextUtilComponent {
     private fun convertHexToString(text: String): String {
         if (isHexString(text)) {
             var textStr = ""
-            var hexChar = ""
-
-            val hexArray = text.toByteArray().filter { isHexDigit(it.toChar()) }.toByteArray()
+            val hexArray = text.chunked(2)
 
             for (char in hexArray) {
-                hexChar += char.toChar()
-
-                if (hexChar.length == 2) {
-                    textStr += hexChar.toLong(radix = 16).toChar()
-                    hexChar = ""
-                }
+                textStr += char.toLong(radix = 16).toChar()
             }
 
             return textStr
@@ -56,7 +51,7 @@ class HexDecoderComponent : TextUtilComponent {
         val hexArray = hexStr.toByteArray()
 
         for (char in hexArray) {
-            if ((!isHexDigit(char.toChar())) && (!char.toChar().isWhitespace()))
+            if (!isHexDigit(char.toChar()))
                 return false
         }
 

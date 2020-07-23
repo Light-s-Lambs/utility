@@ -20,11 +20,6 @@ class HexEncoderComponent : TextUtilComponent {
     }
 
     private fun convertStringToHex(text: String): String {
-        var hexStr = ""
-
-        for (char in text.toByteArray())
-            hexStr += char.toUInt().toString(radix = 16)
-
-        return hexStr
+        return text.toByteArray().map { it.toUInt().toString(16) }.joinToString(" ")
     }
 }

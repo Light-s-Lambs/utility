@@ -1,5 +1,6 @@
 package com.light.utility.ui
 
+import com.light.utility.BasePresenter
 import com.light.utility.domain.Base64DecoderComponent
 import com.light.utility.domain.Base64EncoderComponent
 import com.light.utility.domain.TextUtilComponent
@@ -13,20 +14,26 @@ import java.awt.event.KeyListener
 import javax.swing.JFrame
 import javax.swing.JTextArea
 
-class MainFrame : JFrame() {
+class MainFrame constructor(
+    override val presenter: MainContract.Presenter
+) : MainContract.View, JFrame() {
 
     private val textArea by lazy {
         JTextArea()
     }
 
     val utils by lazy {
-        mutableListOf<UtilComponent>()
+        mutableListOf<BasePresenter>()
+        // mutableListOf<UtilComponent>()
     }
 
     init {
         setupView()
         setupEventListeners()
 
+        val binaryEncoderPresenter = UnicodeToBinaryEncoderPresenter().also { utils.add(it) }
+
+        /*
         val binaryEncoderComponent = UnicodeToBinaryEncoderComponent().also { utils.add(it) }
         UnicodeToBinaryEncoderFrame(binaryEncoderComponent)
 
@@ -35,6 +42,7 @@ class MainFrame : JFrame() {
 
         val base64DecoderComponent = Base64DecoderComponent().also { utils.add(it) }
         Base64DecoderFrame(base64DecoderComponent)
+         */
     }
 
     private fun setupView() {
@@ -57,12 +65,22 @@ class MainFrame : JFrame() {
 
                 override fun keyReleased(p0: KeyEvent?) {
                     utils
-                        .filterIsInstance(TextUtilComponent::class.java)
+                        .filterIsInstance(EncoderContract.Presenter::class.java)
                         .forEach {
-                            it.apply(text)
+                            it.onUserEdited(text)
                         }
                 }
             })
         }
+    }
+
+    override fun showValidationFailed() {
+
+    }
+    override fun showEncodingFailed() {
+
+    }
+    override fun showSuccessfullyEncoded() {
+
     }
 }

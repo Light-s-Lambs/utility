@@ -30,7 +30,7 @@ class HexDecoderComponent : TextUtilComponent {
     private fun convertHexToString(text: String): String {
         if (isHexString(text)) {
             var textStr = ""
-            val hexArray = text.chunked(2)
+            val hexArray = text.replace("\\s".toRegex(), "").chunked(2)
 
             for (char in hexArray) {
                 textStr += char.toLong(radix = 16).toChar()
@@ -51,7 +51,7 @@ class HexDecoderComponent : TextUtilComponent {
         val hexArray = hexStr.toByteArray()
 
         for (char in hexArray) {
-            if (!isHexDigit(char.toChar()))
+            if (!isHexDigit(char.toChar()) && !char.toChar().isWhitespace())
                 return false
         }
 

@@ -29,12 +29,6 @@ class MainFrame : JFrame() {
         setupView()
         setupEventListeners()
 
-        val hexEncoderComponent = HexEncoderComponent().also { utils.add(it) }
-        HexEncoderFrame(hexEncoderComponent)
-
-        val hexDecoderComponent = HexDecoderComponent().also { utils.add(it) }
-        HexDecoderFrame(hexDecoderComponent)
-
         val binaryEncoderComponent = UnicodeToBinaryEncoderComponent().also { utils.add(it) }
         UnicodeToBinaryEncoderFrame(binaryEncoderComponent)
 
@@ -43,6 +37,12 @@ class MainFrame : JFrame() {
 
         val base64DecoderComponent = Base64DecoderComponent().also { utils.add(it) }
         Base64DecoderFrame(base64DecoderComponent)
+
+        val hexEncoderComponent = HexEncoderComponent().also { utils.add(it) }
+        HexEncoderFrame(hexEncoderComponent)
+
+        val hexDecoderComponent = HexDecoderComponent().also { utils.add(it) }
+        HexDecoderFrame(hexDecoderComponent)
     }
 
     private fun setupView() {

@@ -29,14 +29,7 @@ class HexDecoderComponent : TextUtilComponent {
 
     private fun convertHexToString(text: String): String {
         if (isHexString(text)) {
-            var textStr = ""
-            val hexArray = text.replace("\\s".toRegex(), "").chunked(2)
-
-            for (char in hexArray) {
-                textStr += char.toLong(radix = 16).toChar()
-            }
-
-            return textStr
+            return text.replace("\\s".toRegex(), "").chunked(2).map { it.toLong(radix = 16).toChar() }.joinToString("")
         }
 
         return ""

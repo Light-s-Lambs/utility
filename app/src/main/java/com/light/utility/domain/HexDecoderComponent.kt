@@ -27,13 +27,15 @@ class HexDecoderComponent : TextUtilComponent {
             state.value = hexStr
     }
 
-    private fun convertHexToString(text: String): String {
+    private fun convertHexToString(text: String): String =
         if (isHexString(text)) {
-            return text.replace("\\s".toRegex(), "").chunked(2).map { it.toLong(radix = 16).toChar() }.joinToString("")
+            text.replace("\\s".toRegex(), "")
+                .chunked(2)
+                .map { it.toLong(radix = 16).toChar() }
+                .joinToString("")
+        } else {
+            ""
         }
-
-        return ""
-    }
 
     private fun isHexDigit(char: Char): Boolean {
         val hexChars = "abcdefABCDEF"

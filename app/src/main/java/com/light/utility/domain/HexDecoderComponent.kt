@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.StateFlow
 class HexDecoderComponent : TextUtilComponent {
     companion object {
         const val HEX_DECODING_INPUT_ERROR = "Check your Input"
+        const val EMPTY_STRING_DECODE_FAILED = ""
     }
 
     @ExperimentalCoroutinesApi
@@ -34,7 +35,7 @@ class HexDecoderComponent : TextUtilComponent {
                 .map { it.toLong(radix = 16).toChar() }
                 .joinToString("")
         } else {
-            ""
+            EMPTY_STRING_DECODE_FAILED
         }
 
     private fun isHexDigit(char: Char): Boolean {

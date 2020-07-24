@@ -18,6 +18,10 @@ class Base64DecoderFrame constructor(
         JTextArea()
     }
 
+    fun endFrame() {
+        this.dispose()
+    }
+
     init {
         setupView()
         subscribeEventStream()

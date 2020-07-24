@@ -18,6 +18,10 @@ class UnicodeToBinaryEncoderFrame constructor(
         JTextArea()
     }
 
+    fun endFrame() {
+        this.dispose()
+    }
+
     init {
         setupView()
         subscribeEventStream()

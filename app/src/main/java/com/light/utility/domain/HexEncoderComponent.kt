@@ -20,6 +20,12 @@ class HexEncoderComponent : TextUtilComponent {
     }
 
     private fun convertStringToHex(text: String): String {
-        return text.toByteArray().map { it.toUInt().toString(16) }.joinToString(" ")
+        return text.toByteArray()
+            .map { charToHexDigit(it) }
+            .joinToString(" ")
+    }
+
+    private fun charToHexDigit(char: Byte): String {
+        return char.toUInt().toString(16)
     }
 }

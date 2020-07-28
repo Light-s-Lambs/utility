@@ -32,7 +32,7 @@ class HexDecoderComponent : TextUtilComponent {
         if (isHexString(text)) {
             text.replace("\\s".toRegex(), "")
                 .chunked(2)
-                .map { it.toLong(radix = 16).toChar() }
+                .map { hexDigitToChar(it) }
                 .joinToString("")
         } else {
             EMPTY_STRING_DECODE_FAILED
@@ -52,5 +52,9 @@ class HexDecoderComponent : TextUtilComponent {
         }
 
         return true
+    }
+
+    private fun hexDigitToChar(hexDigit: String): Char {
+        return hexDigit.toLong(radix = 16).toChar()
     }
 }

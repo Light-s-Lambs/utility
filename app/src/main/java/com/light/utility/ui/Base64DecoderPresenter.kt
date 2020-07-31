@@ -7,7 +7,7 @@ class Base64DecoderPresenter : EncoderContract.Presenter {
     private val view = Base64DecoderFrame(this)
 
     override fun onUserEdited(text: String) {
-        if(isBase64Str(text)) {
+        if (isBase64Str(text)) {
             component.apply(text)
             view.showSuccessfullyEncoded(component.getState().value)
         } else {

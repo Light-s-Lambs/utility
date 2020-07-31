@@ -34,14 +34,14 @@ class ToggleButtonFactory : JToggleButton() {
                 return base64DecoderButton
             }
             ClassType.HexEncoder -> {
-                val base64DecoderButton = JToggleButton("Hex Encoder")
-                addButtonAction <HexEncoderComponent, HexEncoderFrame>(base64DecoderButton, componentList)
-                return base64DecoderButton
+                val hexEncoderButton = JToggleButton("Hex Encoder")
+                addButtonAction <HexEncoderComponent, HexEncoderFrame>(hexEncoderButton, componentList)
+                return hexEncoderButton
             }
             ClassType.HexDecoder -> {
-                val base64DecoderButton = JToggleButton("Hex Decoder")
-                addButtonAction <HexDecoderComponent, HexDecoderFrame>(base64DecoderButton, componentList)
-                return base64DecoderButton
+                val hexDecoderButton = JToggleButton("Hex Decoder")
+                addButtonAction <HexDecoderComponent, HexDecoderFrame>(hexDecoderButton, componentList)
+                return hexDecoderButton
             }
             else -> {
                 throw IllegalArgumentException("Wrong Parameter")

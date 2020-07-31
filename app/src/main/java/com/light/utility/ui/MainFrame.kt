@@ -2,6 +2,8 @@ package com.light.utility.ui
 
 import com.light.utility.domain.Base64DecoderComponent
 import com.light.utility.domain.Base64EncoderComponent
+import com.light.utility.domain.HexDecoderComponent
+import com.light.utility.domain.HexEncoderComponent
 import com.light.utility.domain.TextUtilComponent
 import com.light.utility.domain.UnicodeToBinaryEncoderComponent
 import com.light.utility.domain.UtilComponent
@@ -35,6 +37,12 @@ class MainFrame : JFrame() {
 
         val base64DecoderComponent = Base64DecoderComponent().also { utils.add(it) }
         Base64DecoderFrame(base64DecoderComponent)
+
+        val hexEncoderComponent = HexEncoderComponent().also { utils.add(it) }
+        HexEncoderFrame(hexEncoderComponent)
+
+        val hexDecoderComponent = HexDecoderComponent().also { utils.add(it) }
+        HexDecoderFrame(hexDecoderComponent)
     }
 
     private fun setupView() {

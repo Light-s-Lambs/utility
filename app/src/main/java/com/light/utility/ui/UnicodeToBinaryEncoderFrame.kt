@@ -12,8 +12,9 @@ import javax.swing.JFrame
 import javax.swing.JTextArea
 
 class UnicodeToBinaryEncoderFrame constructor(
-    private val component: TextUtilComponent
-) : JFrame() {
+    override val presenter: EncoderContract.Presenter
+) : EncoderContract.View, JFrame() {
+
     private val textArea by lazy {
         JTextArea()
     }
@@ -33,10 +34,22 @@ class UnicodeToBinaryEncoderFrame constructor(
     }
 
     private fun subscribeEventStream() {
+        /*
         GlobalScope.launch(Dispatchers.IO) {
-            component.getState().collect {
+            presenter.getComponent().getState().collect {
                 textArea.text = it
             }
         }
+         */
+    }
+
+    override fun showValidationFailed() {
+
+    }
+    override fun showEncodingFailed() {
+
+    }
+    override fun showSuccessfullyEncoded() {
+
     }
 }

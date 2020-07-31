@@ -1,7 +1,7 @@
 package com.light.utility
 
-import com.light.utility.ui.MainFrame
+import com.light.utility.ui.MainPresenter
 
 fun main(args: Array<String>) {
-    MainFrame()
+    MainPresenter()
 }

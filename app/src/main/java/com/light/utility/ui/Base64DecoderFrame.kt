@@ -12,15 +12,19 @@ import javax.swing.JFrame
 import javax.swing.JTextArea
 
 class Base64DecoderFrame constructor(
-    private val component: TextUtilComponent
-) : JFrame() {
+    override val presenter: EncoderContract.Presenter
+) : EncoderContract.View, JFrame() {
     private val textArea by lazy {
         JTextArea()
     }
 
+    companion object {
+        private const val INVALID_INPUT_MESSAGE = "Check your Input"
+        private const val ENCODING_FAIL_MESSAGE = "Encoding failed!"
+    }
+
     init {
         setupView()
-        subscribeEventStream()
     }
 
     private fun setupView() {
@@ -32,11 +36,13 @@ class Base64DecoderFrame constructor(
         isVisible = true
     }
 
-    private fun subscribeEventStream() {
-        GlobalScope.launch(Dispatchers.IO) {
-            component.getState().collect {
-                textArea.text = it
-            }
-        }
+    override fun showValidationFailed() {
+        textArea.text = INVALID_INPUT_MESSAGE
+    }
+    override fun showEncodingFailed() {
+        textArea.text = ENCODING_FAIL_MESSAGE
+    }
+    override fun showSuccessfullyEncoded(text: String) {
+        textArea.text = text
     }
 }

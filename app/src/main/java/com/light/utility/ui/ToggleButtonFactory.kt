@@ -2,9 +2,11 @@ package com.light.utility.ui
 
 import com.light.utility.domain.Base64DecoderComponent
 import com.light.utility.domain.Base64EncoderComponent
+import com.light.utility.domain.TextUtilComponent
 import com.light.utility.domain.UnicodeToBinaryEncoderComponent
 import com.light.utility.domain.UtilComponent
 import java.lang.IllegalArgumentException
+import javax.swing.JFrame
 import javax.swing.JToggleButton
 
 class ToggleButtonFactory : JToggleButton() {
@@ -16,17 +18,17 @@ class ToggleButtonFactory : JToggleButton() {
         when (type) {
             ClassType.UniCodeToBinaryEncoder -> {
                 val unicodeToBinaryEncoderButton = JToggleButton("U2B Encoder")
-                addButtonAction(unicodeToBinaryEncoderButton, type, componentList)
+                addButtonAction <UnicodeToBinaryEncoderComponent, UnicodeToBinaryEncoderFrame>(unicodeToBinaryEncoderButton, componentList)
                 return unicodeToBinaryEncoderButton
             }
             ClassType.Base64Encoder -> {
                 val base64EncoderButton = JToggleButton("Base64 Encoder")
-                addButtonAction(base64EncoderButton, type, componentList)
+                addButtonAction <Base64EncoderComponent, Base64EncoderFrame>(base64EncoderButton, componentList)
                 return base64EncoderButton
             }
             ClassType.Base64Decoder -> {
                 val base64DecoderButton = JToggleButton("Base64 Decoder")
-                addButtonAction(base64DecoderButton, type, componentList)
+                addButtonAction <Base64DecoderComponent, Base64DecoderFrame>(base64DecoderButton, componentList)
                 return base64DecoderButton
             }
             else -> {
@@ -35,43 +37,16 @@ class ToggleButtonFactory : JToggleButton() {
         }
     }
 
-    private fun addButtonAction(btn: JToggleButton, t: ClassType, componentList: MutableList<UtilComponent>) {
-        when (t) {
-            ClassType.UniCodeToBinaryEncoder -> {
-                lateinit var unicodeToBinaryEncoderFrame: UnicodeToBinaryEncoderFrame
-                btn.addActionListener {
-                    if (btn.isSelected) {
-                        val binaryEncoderComponent = UnicodeToBinaryEncoderComponent().also { componentList.add(it) }
-                        unicodeToBinaryEncoderFrame = UnicodeToBinaryEncoderFrame(binaryEncoderComponent)
-                    } else {
-                        componentList.removeIf { it == UnicodeToBinaryEncoderComponent::class.java }
-                        unicodeToBinaryEncoderFrame.dispose()
-                    }
-                }
-            }
-            ClassType.Base64Encoder -> {
-                lateinit var base64EncoderFrame: Base64EncoderFrame
-                btn.addActionListener {
-                    if (btn.isSelected) {
-                        val base64EncoderComponent = Base64EncoderComponent().also { componentList.add(it) }
-                        base64EncoderFrame = Base64EncoderFrame(base64EncoderComponent)
-                    } else {
-                        componentList.removeIf { it == Base64EncoderComponent::class.java }
-                        base64EncoderFrame.dispose()
-                    }
-                }
-            }
-            ClassType.Base64Decoder -> {
-                lateinit var base64DecoderFrame: Base64DecoderFrame
-                btn.addActionListener {
-                    if (btn.isSelected) {
-                        val base64DecoderComponent = Base64DecoderComponent().also { componentList.add(it) }
-                        base64DecoderFrame = Base64DecoderFrame(base64DecoderComponent)
-                    } else {
-                        componentList.removeIf { it == Base64DecoderComponent::class.java }
-                        base64DecoderFrame.dispose()
-                    }
-                }
+    private inline fun <reified componentClass : UtilComponent, reified frameClass : JFrame> addButtonAction(btn: JToggleButton, componentList: MutableList<UtilComponent>) {
+        lateinit var frame: frameClass
+        btn.addActionListener {
+            if (btn.isSelected) {
+                val component = componentClass::class.java.newInstance().also { componentList.add(it) }
+                val frameConstructor = frameClass::class.java.getConstructor(TextUtilComponent::class.java)
+                frame = frameConstructor.newInstance(component)
+            } else {
+                componentList.removeIf { it == componentClass::class.java }
+                frame.dispose()
             }
         }
     }

@@ -2,6 +2,8 @@ package com.light.utility.ui
 
 import com.light.utility.domain.Base64DecoderComponent
 import com.light.utility.domain.Base64EncoderComponent
+import com.light.utility.domain.HexDecoderComponent
+import com.light.utility.domain.HexEncoderComponent
 import com.light.utility.domain.TextUtilComponent
 import com.light.utility.domain.UnicodeToBinaryEncoderComponent
 import com.light.utility.domain.UtilComponent
@@ -11,7 +13,7 @@ import javax.swing.JToggleButton
 
 class ToggleButtonFactory : JToggleButton() {
     enum class ClassType {
-        UniCodeToBinaryEncoder, Base64Encoder, Base64Decoder
+        UniCodeToBinaryEncoder, Base64Encoder, Base64Decoder, HexEncoder, HexDecoder
     }
 
     fun createToggleButton(type: ClassType, componentList: MutableList<UtilComponent>): JToggleButton {
@@ -29,6 +31,16 @@ class ToggleButtonFactory : JToggleButton() {
             ClassType.Base64Decoder -> {
                 val base64DecoderButton = JToggleButton("Base64 Decoder")
                 addButtonAction <Base64DecoderComponent, Base64DecoderFrame>(base64DecoderButton, componentList)
+                return base64DecoderButton
+            }
+            ClassType.HexEncoder -> {
+                val base64DecoderButton = JToggleButton("Hex Encoder")
+                addButtonAction <HexEncoderComponent, HexEncoderFrame>(base64DecoderButton, componentList)
+                return base64DecoderButton
+            }
+            ClassType.HexDecoder -> {
+                val base64DecoderButton = JToggleButton("Hex Decoder")
+                addButtonAction <HexDecoderComponent, HexDecoderFrame>(base64DecoderButton, componentList)
                 return base64DecoderButton
             }
             else -> {

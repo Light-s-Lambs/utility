@@ -30,6 +30,8 @@ class MainFrame : JFrame() {
         sideBarPanel.add(ToggleButtonFactory().createToggleButton(ToggleButtonFactory.ClassType.UniCodeToBinaryEncoder, utils))
         sideBarPanel.add(ToggleButtonFactory().createToggleButton(ToggleButtonFactory.ClassType.Base64Encoder, utils))
         sideBarPanel.add(ToggleButtonFactory().createToggleButton(ToggleButtonFactory.ClassType.Base64Decoder, utils))
+        sideBarPanel.add(ToggleButtonFactory().createToggleButton(ToggleButtonFactory.ClassType.HexEncoder, utils))
+        sideBarPanel.add(ToggleButtonFactory().createToggleButton(ToggleButtonFactory.ClassType.HexDecoder, utils))
     }
 
     private fun setupView() {

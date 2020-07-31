@@ -4,13 +4,13 @@ import com.light.utility.BasePresenter
 import com.light.utility.BaseView
 
 interface EncoderContract {
-    interface View: BaseView<Presenter> {
+    interface View : BaseView<Presenter> {
         fun showValidationFailed()
         fun showEncodingFailed()
-        fun showSuccessfullyEncoded()
+        fun showSuccessfullyEncoded(text: String)
     }
 
-    interface Presenter: BasePresenter {
+    interface Presenter : BasePresenter {
         fun onUserEdited(text: String)
     }
 }

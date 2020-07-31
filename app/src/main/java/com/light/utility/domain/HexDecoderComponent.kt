@@ -30,7 +30,7 @@ class HexDecoderComponent : TextUtilComponent {
 
     private fun convertHexToString(text: String): String =
         if (isHexString(text)) {
-            text.replace("\\s".toRegex(), "")
+            removeWhitespace(text)
                 .chunked(2)
                 .map { hexDigitToChar(it) }
                 .joinToString("")
@@ -56,5 +56,9 @@ class HexDecoderComponent : TextUtilComponent {
 
     private fun hexDigitToChar(hexDigit: String): Char {
         return hexDigit.toLong(radix = 16).toChar()
+    }
+
+    private fun removeWhitespace(hexString: String): String {
+        return hexString.replace("\\s".toRegex(), "")
     }
 }

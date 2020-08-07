@@ -16,6 +16,16 @@ class OctEncoderComponent : TextUtilComponent {
 
     @ExperimentalCoroutinesApi
     override fun apply(text: String) {
-        state.value = text
+        state.value = convertStringToOct(text)
+    }
+
+    private fun convertStringToOct(text: String): String {
+        return text.toByteArray()
+            .map { charToOctDigit(it) }
+            .joinToString(" ")
+    }
+
+    private fun charToOctDigit(char: Byte): String {
+        return char.toUInt().toString(8)
     }
 }

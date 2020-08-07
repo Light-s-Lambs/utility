@@ -4,6 +4,8 @@ import com.light.utility.domain.Base64DecoderComponent
 import com.light.utility.domain.Base64EncoderComponent
 import com.light.utility.domain.HexDecoderComponent
 import com.light.utility.domain.HexEncoderComponent
+import com.light.utility.domain.OctDecoderComponent
+import com.light.utility.domain.OctEncoderComponent
 import com.light.utility.domain.TextUtilComponent
 import com.light.utility.domain.UnicodeToBinaryEncoderComponent
 import com.light.utility.domain.UtilComponent
@@ -43,6 +45,12 @@ class MainFrame : JFrame() {
 
         val hexDecoderComponent = HexDecoderComponent().also { utils.add(it) }
         HexDecoderFrame(hexDecoderComponent)
+
+        val octEncoderComponent = OctEncoderComponent().also { utils.add(it) }
+        HexEncoderFrame(octEncoderComponent)
+
+        val octDecoderComponent = OctDecoderComponent().also { utils.add(it) }
+        HexDecoderFrame(octDecoderComponent)
     }
 
     private fun setupView() {

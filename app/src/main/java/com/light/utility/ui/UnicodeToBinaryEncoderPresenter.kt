@@ -7,7 +7,17 @@ class UnicodeToBinaryEncoderPresenter constructor(
     private val component: UnicodeToBinaryEncoderComponent
 ) : EncoderContract.Presenter {
     override fun onUserEdited(text: String) {
-        component.apply(text)
-        view.showSuccessfullyEncoded(component.getState().value)
+        if (isValidString()) {
+            component.apply(text)
+            if (isEncodeSuccessful())
+                view.showSuccessfullyEncoded(component.getState().value)
+            else
+                view.showEncodingFailed()
+        }
+        else
+            view.showValidationFailed()
     }
+
+    private fun isValidString() = true
+    private fun isEncodeSuccessful() = true
 }

@@ -1,5 +1,6 @@
 package com.light.utility.ui
 
+import com.light.utility.domain.Base64EncoderComponent
 import java.awt.Dimension
 import java.awt.Point
 import java.awt.Toolkit
@@ -7,8 +8,10 @@ import javax.swing.JFrame
 import javax.swing.JTextArea
 
 class Base64EncoderFrame constructor(
-    override val presenter: EncoderContract.Presenter
+    component: Base64EncoderComponent
 ) : EncoderContract.View, JFrame() {
+    override val presenter = Base64EncoderPresenter(this, component)
+
     private val textArea by lazy {
         JTextArea()
     }

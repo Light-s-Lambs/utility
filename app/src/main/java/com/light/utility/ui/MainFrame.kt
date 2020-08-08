@@ -1,6 +1,9 @@
 package com.light.utility.ui
 
 import com.light.utility.BasePresenter
+import com.light.utility.domain.Base64DecoderComponent
+import com.light.utility.domain.Base64EncoderComponent
+import com.light.utility.domain.UnicodeToBinaryEncoderComponent
 import java.awt.BorderLayout
 import java.awt.Dimension
 import java.awt.Toolkit
@@ -9,8 +12,7 @@ import java.awt.event.KeyListener
 import javax.swing.JFrame
 import javax.swing.JTextArea
 
-class MainFrame constructor(
-) : JFrame() {
+class MainFrame : JFrame() {
     private val textArea by lazy {
         JTextArea()
     }
@@ -23,9 +25,9 @@ class MainFrame constructor(
         setupView()
         setupEventListeners()
 
-        UnicodeToBinaryEncoderPresenter().also { utils.add(it) }
-        Base64EncoderPresenter().also { utils.add(it) }
-        Base64DecoderPresenter().also { utils.add(it) }
+        UnicodeToBinaryEncoderFrame(UnicodeToBinaryEncoderComponent()).also { utils.add(it.presenter) }
+        Base64EncoderFrame(Base64EncoderComponent()).also { utils.add(it.presenter) }
+        Base64DecoderFrame(Base64DecoderComponent()).also { utils.add(it.presenter) }
     }
 
     private fun setupView() {

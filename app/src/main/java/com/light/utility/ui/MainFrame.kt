@@ -1,5 +1,6 @@
 package com.light.utility.ui
 
+import com.light.utility.BasePresenter
 import java.awt.BorderLayout
 import java.awt.Dimension
 import java.awt.Toolkit
@@ -9,15 +10,22 @@ import javax.swing.JFrame
 import javax.swing.JTextArea
 
 class MainFrame constructor(
-    override val presenter: MainContract.Presenter
-) : MainContract.View, JFrame() {
+) : JFrame() {
     private val textArea by lazy {
         JTextArea()
+    }
+
+    private val utils by lazy {
+        mutableListOf<BasePresenter>()
     }
 
     init {
         setupView()
         setupEventListeners()
+
+        UnicodeToBinaryEncoderPresenter().also { utils.add(it) }
+        Base64EncoderPresenter().also { utils.add(it) }
+        Base64DecoderPresenter().also { utils.add(it) }
     }
 
     private fun setupView() {
@@ -39,7 +47,11 @@ class MainFrame constructor(
                 }
 
                 override fun keyReleased(p0: KeyEvent?) {
-                    presenter.onUserEdited(text)
+                    utils
+                        .filterIsInstance(EncoderContract.Presenter::class.java)
+                        .forEach {
+                            it.onUserEdited(text)
+                        }
                 }
             })
         }

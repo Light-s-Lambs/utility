@@ -1,10 +1,10 @@
 package com.light.utility.ui
 
-import com.light.utility.domain.UnicodeToBinaryEncoderComponent
+import com.light.utility.domain.TextUtilComponent
 
 class UnicodeToBinaryEncoderPresenter constructor(
     private val view: EncoderContract.View,
-    private val component: UnicodeToBinaryEncoderComponent
+    private val component: TextUtilComponent
 ) : EncoderContract.Presenter {
     override fun onUserEdited(text: String) {
         if (isValidString()) {
@@ -13,8 +13,7 @@ class UnicodeToBinaryEncoderPresenter constructor(
                 view.showSuccessfullyEncoded(component.getState().value)
             else
                 view.showEncodingFailed()
-        }
-        else
+        } else
             view.showValidationFailed()
     }
 

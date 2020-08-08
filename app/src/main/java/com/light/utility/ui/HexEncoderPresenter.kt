@@ -1,10 +1,10 @@
 package com.light.utility.ui
 
-import com.light.utility.domain.HexEncoderComponent
+import com.light.utility.domain.TextUtilComponent
 
 class HexEncoderPresenter constructor(
     private val view: HexEncoderFrame,
-    private val component: HexEncoderComponent
+    private val component: TextUtilComponent
 ) : EncoderContract.Presenter {
     override fun onUserEdited(text: String) {
         if (isValidString()) {

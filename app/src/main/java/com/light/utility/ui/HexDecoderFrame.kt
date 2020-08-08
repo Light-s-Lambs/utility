@@ -1,6 +1,6 @@
 package com.light.utility.ui
 
-import com.light.utility.domain.HexDecoderComponent
+import com.light.utility.domain.TextUtilComponent
 import java.awt.Dimension
 import java.awt.Point
 import java.awt.Toolkit
@@ -8,7 +8,7 @@ import javax.swing.JFrame
 import javax.swing.JTextArea
 
 class HexDecoderFrame constructor(
-    component: HexDecoderComponent
+    component: TextUtilComponent
 ) : EncoderContract.View, JFrame() {
     override val presenter = HexDecoderPresenter(this, component)
 

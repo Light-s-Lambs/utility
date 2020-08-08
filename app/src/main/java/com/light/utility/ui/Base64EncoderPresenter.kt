@@ -1,10 +1,10 @@
 package com.light.utility.ui
 
-import com.light.utility.domain.Base64EncoderComponent
+import com.light.utility.domain.TextUtilComponent
 
 class Base64EncoderPresenter constructor(
     private val view: Base64EncoderFrame,
-    private val component: Base64EncoderComponent
+    private val component: TextUtilComponent
 ) : EncoderContract.Presenter {
 
     override fun onUserEdited(text: String) {
@@ -14,8 +14,7 @@ class Base64EncoderPresenter constructor(
                 view.showSuccessfullyEncoded(component.getState().value)
             else
                 view.showEncodingFailed()
-        }
-        else
+        } else
             view.showValidationFailed()
     }
     private fun isValidString() = true

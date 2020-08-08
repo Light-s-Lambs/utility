@@ -1,10 +1,10 @@
 package com.light.utility.ui
 
-import com.light.utility.domain.Base64DecoderComponent
+import com.light.utility.domain.TextUtilComponent
 
 class Base64DecoderPresenter constructor(
     private val view: Base64DecoderFrame,
-    private val component: Base64DecoderComponent
+    private val component: TextUtilComponent
 ) : EncoderContract.Presenter {
     override fun onUserEdited(text: String) {
         if (isBase64Str(text)) {

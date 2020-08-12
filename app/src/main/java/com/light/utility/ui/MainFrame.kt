@@ -4,7 +4,9 @@ import com.light.utility.domain.Base64DecoderComponent
 import com.light.utility.domain.Base64EncoderComponent
 import com.light.utility.domain.HexDecoderComponent
 import com.light.utility.domain.HexEncoderComponent
+import com.light.utility.domain.TextUtilComponent
 import com.light.utility.domain.UnicodeToBinaryEncoderComponent
+import com.light.utility.domain.UtilComponent
 import java.awt.BorderLayout
 import java.awt.Dimension
 import java.awt.Toolkit
@@ -20,23 +22,27 @@ class MainFrame : MainContract.View, JFrame() {
         JTextArea()
     }
 
+    private val utils by lazy {
+        mutableListOf<UtilComponent>()
+    }
+
     init {
         setupView()
         setupEventListeners()
 
-        val binaryEncoderComponent = UnicodeToBinaryEncoderComponent().also { presenter.addList(it) }
+        val binaryEncoderComponent = UnicodeToBinaryEncoderComponent().also { utils.add(it) }
         UnicodeToBinaryEncoderFrame(binaryEncoderComponent)
 
-        val base64EncoderComponent = Base64EncoderComponent().also { presenter.addList(it) }
+        val base64EncoderComponent = Base64EncoderComponent().also { utils.add(it) }
         Base64EncoderFrame(base64EncoderComponent)
 
-        val base64DecoderComponent = Base64DecoderComponent().also { presenter.addList(it) }
+        val base64DecoderComponent = Base64DecoderComponent().also { utils.add(it) }
         Base64DecoderFrame(base64DecoderComponent)
 
-        val hexEncoderComponent = HexEncoderComponent().also { presenter.addList(it) }
+        val hexEncoderComponent = HexEncoderComponent().also { utils.add(it) }
         HexEncoderFrame(hexEncoderComponent)
 
-        val hexDecoderComponent = HexDecoderComponent().also { presenter.addList(it) }
+        val hexDecoderComponent = HexDecoderComponent().also { utils.add(it) }
         HexDecoderFrame(hexDecoderComponent)
     }
 
@@ -63,5 +69,13 @@ class MainFrame : MainContract.View, JFrame() {
                 }
             })
         }
+    }
+
+    override fun getChanged(text: String) {
+        utils
+            .filterIsInstance(TextUtilComponent::class.java)
+            .forEach {
+                it.apply(text)
+            }
     }
 }

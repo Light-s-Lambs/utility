@@ -3,7 +3,7 @@ package com.light.utility.ui
 interface MainContract {
     interface View {
         val presenter: Presenter
-        fun getChanged(text: String)
+        fun showText(text: String)
     }
 
     interface Presenter {

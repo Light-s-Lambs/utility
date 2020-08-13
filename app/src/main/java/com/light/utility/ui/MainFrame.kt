@@ -71,7 +71,7 @@ class MainFrame : MainContract.View, JFrame() {
         }
     }
 
-    override fun getChanged(text: String) {
+    override fun showText(text: String) {
         utils
             .filterIsInstance(TextUtilComponent::class.java)
             .forEach {

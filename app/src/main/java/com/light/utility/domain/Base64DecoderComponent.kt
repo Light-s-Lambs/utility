@@ -14,6 +14,8 @@ class Base64DecoderComponent : TextUtilComponent {
         MutableStateFlow("")
     }
 
+    override fun getName(): String = "Base64Decoder"
+
     override fun getState(): StateFlow<String> = state
 
     override fun apply(text: String) {

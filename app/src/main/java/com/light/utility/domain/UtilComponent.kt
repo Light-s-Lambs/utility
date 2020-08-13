@@ -1,3 +1,5 @@
 package com.light.utility.domain
 
-interface UtilComponent
+interface UtilComponent {
+    fun getName(): String
+}

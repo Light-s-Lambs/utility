@@ -11,6 +11,8 @@ class UnicodeToBinaryEncoderComponent : TextUtilComponent {
         MutableStateFlow("")
     }
 
+    override fun getName(): String = "UnicodeToBinaryEncoder"
+
     override fun getState(): StateFlow<String> = state
 
     override fun apply(text: String) {

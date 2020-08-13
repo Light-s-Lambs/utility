@@ -28,7 +28,6 @@ class MainFrame : JFrame() {
     }
 
     private val frameFactory = UtilFrameFactory()
-    private val toggleButtonFactory = UtilToggleButtonFactory(frameFactory)
 
     init {
         setupComponent()
@@ -49,7 +48,7 @@ class MainFrame : JFrame() {
     private fun setupButton(sideBarPanel: JPanel) {
         sideBarPanel.apply {
             utils.forEach { component ->
-                add(toggleButtonFactory.create(component))
+                add(UtilToggleButton(frameFactory, component))
             }
         }
     }

@@ -1,13 +1,30 @@
 package com.light.utility.ui
-import kotlin.reflect.KClass
 
-class UtilToggleButtonFactory {
+import com.light.utility.domain.*
 
-    fun createToggleButton(componentClass: KClass<*>): UtilToggleButton {
-        return UtilToggleButton(resolveButtonName(componentClass))
-    }
+class UtilToggleButtonFactory constructor(
+    private val frameFactory: UtilFrameFactory
+) {
 
-    private fun resolveButtonName(componentClass: KClass<*>): String {
-        return componentClass.simpleName.toString().replace("Component", "")
-    }
+    fun create(component: UtilComponent): UtilToggleButton =
+        when (component) {
+            is Base64DecoderComponent -> {
+                UtilToggleButton(frameFactory, component)
+            }
+            is Base64EncoderComponent -> {
+                UtilToggleButton(frameFactory, component)
+            }
+            is HexDecoderComponent -> {
+                UtilToggleButton(frameFactory, component)
+            }
+            is HexEncoderComponent -> {
+                UtilToggleButton(frameFactory, component)
+            }
+            is UnicodeToBinaryEncoderComponent -> {
+                UtilToggleButton(frameFactory, component)
+            }
+            else -> {
+                throw IllegalArgumentException()
+            }
+        }
 }

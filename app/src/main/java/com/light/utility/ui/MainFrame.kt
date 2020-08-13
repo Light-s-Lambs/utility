@@ -15,7 +15,7 @@ import java.awt.event.KeyListener
 import javax.swing.JFrame
 import javax.swing.JTextArea
 
-class MainFrame : MainContract.View, JFrame() {
+class MainFrame : JFrame(), MainContract.View {
     override val presenter = MainPresenter(this)
 
     private val textArea by lazy {

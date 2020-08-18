@@ -14,7 +14,10 @@ class UtilToggleButton constructor(
     init {
         addActionListener {
             if (isSelected) {
-                frame = frameFactory.create(component)
+                if (!::frame.isInitialized) {
+                    frame = frameFactory.create(component)
+                }
+                frame.isVisible = true
             } else {
                 frame.dispose()
             }

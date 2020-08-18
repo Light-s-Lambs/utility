@@ -47,9 +47,7 @@ class MainFrame : JFrame() {
 
     private fun setupButton(sideBarPanel: JPanel) {
         utils.forEach { component ->
-            sideBarPanel.apply {
-                add(UtilToggleButton(frameFactory, component))
-            }
+            sideBarPanel.add(UtilToggleButton(frameFactory, component))
         }
     }
 

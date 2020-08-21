@@ -15,6 +15,8 @@ class HexDecoderComponent : TextUtilComponent {
         MutableStateFlow("")
     }
 
+    override fun getName(): String = "HexDecoder"
+
     @ExperimentalCoroutinesApi
     override fun getState(): StateFlow<String> = state
 

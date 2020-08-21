@@ -1,4 +1,5 @@
 package com.light.utility.ui
+
 import com.light.utility.domain.Base64DecoderComponent
 import com.light.utility.domain.Base64EncoderComponent
 import com.light.utility.domain.HexDecoderComponent
@@ -22,51 +23,32 @@ class MainFrame : JFrame() {
         JTextArea()
     }
 
-    val utils by lazy {
+    private val utils by lazy {
         mutableListOf<UtilComponent>()
     }
 
+    private val frameFactory = UtilFrameFactory()
+
     init {
+        setupComponent()
         setupView()
         setupEventListeners()
     }
 
+    private fun setupComponent() {
+        utils.apply {
+            add(UnicodeToBinaryEncoderComponent())
+            add(Base64EncoderComponent())
+            add(Base64DecoderComponent())
+            add(HexEncoderComponent())
+            add(HexDecoderComponent())
+        }
+    }
+
     private fun setupButton(sideBarPanel: JPanel) {
-        sideBarPanel.add(
-            UtilToggleButtonFactory().createToggleButton(
-                UnicodeToBinaryEncoderComponent::class
-            ).apply {
-                addCommonUtilToggleButtonAction(UnicodeToBinaryEncoderComponent::class, UnicodeToBinaryEncoderFrame::class, utils)
-            }
-        )
-        sideBarPanel.add(
-            UtilToggleButtonFactory().createToggleButton(
-                Base64EncoderComponent::class
-            ).apply {
-                addCommonUtilToggleButtonAction(Base64EncoderComponent::class, Base64EncoderFrame::class, utils)
-            }
-        )
-        sideBarPanel.add(
-            UtilToggleButtonFactory().createToggleButton(
-                Base64DecoderComponent::class
-            ).apply {
-                addCommonUtilToggleButtonAction(Base64DecoderComponent::class, Base64DecoderFrame::class, utils)
-            }
-        )
-        sideBarPanel.add(
-            UtilToggleButtonFactory().createToggleButton(
-                HexEncoderComponent::class
-            ).apply {
-                addCommonUtilToggleButtonAction(HexEncoderComponent::class, HexEncoderFrame::class, utils)
-            }
-        )
-        sideBarPanel.add(
-            UtilToggleButtonFactory().createToggleButton(
-                HexDecoderComponent::class
-            ).apply {
-                addCommonUtilToggleButtonAction(HexDecoderComponent::class, HexDecoderFrame::class, utils)
-            }
-        )
+        utils.forEach { component ->
+            sideBarPanel.add(UtilToggleButton(frameFactory, component))
+        }
     }
 
     private fun setupView() {

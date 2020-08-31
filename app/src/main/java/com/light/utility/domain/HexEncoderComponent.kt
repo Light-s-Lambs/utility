@@ -11,6 +11,8 @@ class HexEncoderComponent : TextUtilComponent {
         MutableStateFlow("")
     }
 
+    override fun getName(): String = "HexEncoder"
+
     @ExperimentalCoroutinesApi
     override fun getState(): StateFlow<String> = state
 

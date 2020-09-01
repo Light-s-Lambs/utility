@@ -17,7 +17,8 @@ import javax.swing.JFrame
 import javax.swing.JPanel
 import javax.swing.JTextArea
 
-class MainFrame : JFrame() {
+class MainFrame : JFrame(), MainContract.View {
+    override val presenter = MainPresenter(this)
 
     private val textArea by lazy {
         JTextArea()
@@ -75,13 +76,17 @@ class MainFrame : JFrame() {
                 }
 
                 override fun keyReleased(p0: KeyEvent?) {
-                    utils
-                        .filterIsInstance(TextUtilComponent::class.java)
-                        .forEach {
-                            it.apply(text)
-                        }
+                    presenter.onUserEdited(text)
                 }
             })
         }
+    }
+
+    override fun showText(text: String) {
+        utils
+            .filterIsInstance(TextUtilComponent::class.java)
+            .forEach {
+                it.apply(text)
+            }
     }
 }
